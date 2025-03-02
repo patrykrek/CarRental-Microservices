@@ -1,0 +1,66 @@
+﻿
+
+@model List<app.Web.Models.DTO.GetReservationDTO>
+
+
+<div class="text-center">
+    <h1 class="display-4">All Reservations</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Car ID
+                </th>
+                <th>
+                    User ID
+                </th>
+                <th>
+                    Reservation Date
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    End Date 
+                </th>
+                <th>
+                    Total Price
+                </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in Model)
+            {
+                <tr>
+                    <td>
+                        @reservation.Id
+                    </td>
+                    <td>
+                        @reservation.CarId
+                    </td>
+                    <td>
+                        @reservation.UserId
+                    </td>
+                    <td>
+                        @reservation.ReservationDate
+                    </td>
+                    <td>
+                        @reservation.StartDate
+                    </td>
+                    <td>
+                        @reservation.EndDate
+                    </td>
+                    <td>
+                        @reservation.TotalPrice
+                    </td>                  
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Add / Car";
+}
+
+@model app.Web.Models.DTO.AddCarDTO
+
+<div class="text-center">
+    <h1 class="display-4"><b>Add Car</b></h1>
+
+</div>
+
+<form asp-controller="Car" asp-action="AddCar" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+
+        <label class="mt-4">Make</label>
+
+        <input class="form-control" type="text" placeholder="Enter Name" asp-for="Make"></input>
+
+        <span class="text-danger" asp-validation-for="Make"></span>
+
+    </div>
+
+    <div class="form-group">
+
+        <label class="mt-4">Model</label>
+
+        <input class="form-control" type="text" placeholder="0.00" asp-for="Model"></input>
+
+        <span class="text-danger" asp-validation-for="Model"></span>
+
+    </div>
+    <div class="form-group">
+
+        <label class="mt-4">Type</label>
+
+        <input class="form-control" type="text" placeholder="Type" asp-for="Type"></input>
+
+        <span class="text-danger" asp-validation-for="Type"></span>
+
+    </div>
+    <div class="form-group">
+
+        <label class="mt-4">Description</label>
+
+        <input class="form-control" type="text" placeholder="Description" asp-for="Description"></input>
+
+        <span class="text-danger" asp-validation-for="Description"></span>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="mt-4">Price Per Day</label>
+
+        <input class="form-control" type="number" placeholder="0" asp-for="PricePerDay" step="0.01"></input>
+
+        <span class="text-danger" asp-validation-for="PricePerDay"></span>
+
+    </div>
+
+    <div class="form-group">
+
+        <label class="mt-4">Year</label>
+
+        <input class="form-control" type="number" placeholder="0" asp-for="Year"></input>
+
+        <span class="text-danger" asp-validation-for="Year"></span>
+
+    </div>
+    <div class="form-group">
+
+        <label class="mt-4">Image</label>
+
+        <input class="form-control" type="file" asp-for="Image"></input>
+
+        <span class="text-danger" asp-validation-for="Image"></span>
+
+    </div>
+
+    <button class="btn btn-primary" type="submit" style="margin-top:10px;">Ok</button>
+
+</form>

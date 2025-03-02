@@ -1,0 +1,35 @@
+﻿
+@model List<app.Web.Models.DTO.GetCarDTO>
+
+
+<form>
+    <div class="container row">
+
+        @foreach (var car in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="p-0 my-3 border-rounded">
+                    <div class="card">
+                        <h3 class="card-title text-white-50 text-center py-2 ">@car.Make @car.Model</h3>
+                        <img src="@car.ImageUrl" class="card-img-top">
+                        <div class="card-body">
+                            <div class="justify-content-between py-2 d-flex">
+                                <span class="text-danger">Price per day: @car.PricePerDay zł</span>    
+                                <span class="badge bg-warning text-white p-2">@car.Type</span>
+                            </div>
+
+                            <p class="card-text">@car.Description</p>
+                            <div class="row">
+                                <div class="col">
+                                    <a asp-controller="Home" asp-action="CarDetails" asp-route-id="@car.Id" class="btn btn-success form-control ">Details</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }   
+        
+    </div>
+</form>

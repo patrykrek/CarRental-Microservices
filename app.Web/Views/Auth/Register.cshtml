@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "_AuthLayout";
+}
+
+@model app.Web.Models.DTO.RegistrationRequestDTO
+
+<div class="container">
+    <form asp-controller="Auth" asp-action="Register" method="post">
+        <div class="input-box ">
+            <h1>Register</h1>
+
+            <p>Email</p>
+
+            <input type="email" placeholder="Email" asp-for="Email"></input>
+
+            <span class="text-danger" asp-validation-for="Email"></span>
+
+        </div>
+
+        <div class="input-box">
+            <p>Name</p>
+
+            <input type="text" placeholder="Name" asp-for="Name"></input>
+
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+
+        <div class="input-box">
+            <p>Password</p>
+
+            <input type="password" placeholder="Password" asp-for="Password"></input>
+
+            <span class="text-danger" asp-validation-for="Password"></span>
+
+        </div>
+
+        <div class="input-box">
+            <p>Phone Number</p>
+
+            <input type="text" placeholder="Phone Number" asp-for="PhoneNumber"></input>
+
+            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+
+        </div>
+
+        <div class="input-box">
+            <p>Role</p>
+
+            <select class="role-select" asp-for="Role" asp-items="@ViewBag.Roles">
+                <option disabled selected>---Select Role---</option>
+            </select>
+        </div>
+
+        <button class="btn" type="submit">Register</button>
+
+        <div class="have-account">
+            <p>
+                Already have an account?
+                <a asp-controller="Auth" asp-action="Login">Login</a>
+            </p>
+        </div>
+
+        <div class="back-link">
+            <a asp-controller="Home" asp-action="Index">Back</a>
+        </div>
+
+    </form>
+    
+
+</div>

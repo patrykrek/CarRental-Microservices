@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{76C1BBDB-54F9-4CFD-8A21-1D63EC0FA5F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{A24FC6E1-BAF3-4E3C-AB62-8A7CB6C54EE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{658DEB2C-88B9-41B1-BE24-6905BBD192EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F23CCB97-3CAF-4B54-B4F4-5159823366F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.Services.CarAPI", "app.Services.CarAPI\app.Services.CarAPI.csproj", "{8C31B856-92C2-4860-A3BB-4297441523D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.Web", "app.Web\app.Web.csproj", "{95A77E92-E898-46A6-A981-D23A1E540C0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.Services.AuthAPI", "app.Services.AuthAPI\app.Services.AuthAPI.csproj", "{5694FEFB-FAE6-48B2-ADBD-B7689C0E93D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.Services.ReservationAPI", "app.Services.ReservationAPI\app.Services.ReservationAPI.csproj", "{B5184051-AF41-45FC-988D-39FD9C067869}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C31B856-92C2-4860-A3BB-4297441523D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C31B856-92C2-4860-A3BB-4297441523D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C31B856-92C2-4860-A3BB-4297441523D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C31B856-92C2-4860-A3BB-4297441523D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95A77E92-E898-46A6-A981-D23A1E540C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95A77E92-E898-46A6-A981-D23A1E540C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95A77E92-E898-46A6-A981-D23A1E540C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95A77E92-E898-46A6-A981-D23A1E540C0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5694FEFB-FAE6-48B2-ADBD-B7689C0E93D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5694FEFB-FAE6-48B2-ADBD-B7689C0E93D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5694FEFB-FAE6-48B2-ADBD-B7689C0E93D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5694FEFB-FAE6-48B2-ADBD-B7689C0E93D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5184051-AF41-45FC-988D-39FD9C067869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5184051-AF41-45FC-988D-39FD9C067869}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5184051-AF41-45FC-988D-39FD9C067869}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5184051-AF41-45FC-988D-39FD9C067869}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C31B856-92C2-4860-A3BB-4297441523D1} = {F23CCB97-3CAF-4B54-B4F4-5159823366F0}
+		{95A77E92-E898-46A6-A981-D23A1E540C0C} = {76C1BBDB-54F9-4CFD-8A21-1D63EC0FA5F8}
+		{5694FEFB-FAE6-48B2-ADBD-B7689C0E93D0} = {F23CCB97-3CAF-4B54-B4F4-5159823366F0}
+		{B5184051-AF41-45FC-988D-39FD9C067869} = {F23CCB97-3CAF-4B54-B4F4-5159823366F0}
+	EndGlobalSection
+EndGlobal

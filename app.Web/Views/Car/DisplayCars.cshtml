@@ -1,0 +1,74 @@
+﻿@{
+     ViewData["Title"] = "Display / Cars";
+}
+
+@model List<app.Web.Models.DTO.GetCarDTO>
+
+
+<div class="text-center">
+    <h1 class="display-4">All Cars</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Make
+                </th>
+                <th>
+                    Model
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Price Per Day
+                </th>
+                <th>
+                    Year
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var car in Model)
+            {
+                <tr>
+                    <td>
+                        @car.Id
+                    </td>
+                    <td>
+                        @car.Make
+                    </td>
+                    <td>
+                        @car.Model
+                    </td>
+                    <td>
+                        @car.Type
+                    </td>
+                    <td>
+                        @car.Description
+                    </td>
+                    <td>
+                        @car.PricePerDay
+                    </td>
+                    <td>
+                        @car.Year
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-controller="Car" asp-action="EditCar" asp-route-id="@car.Id">Edit</a>
+                        <a class="btn btn-danger btn-sm" asp-controller="Car" asp-action="DeleteCar" asp-route-id="@car.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
