@@ -116,6 +116,8 @@ namespace app.Services.CarAPI.Services
                 if (findCar == null)
                 {
                     _response.IsSuccess = false;
+
+                    _response.Message = "Car not found";
                 }
 
                 await _carRepository.DeleteCar(findCar);
