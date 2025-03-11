@@ -159,6 +159,8 @@ namespace app.Services.CarAPI.Services
 
                     getCar.Year = car.Year;
 
+                    getCar.ImageUrl = car.ImageUrl;
+
                     await _carRepository.UpdateCar(getCar);
                 }               
 
