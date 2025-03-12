@@ -17,7 +17,7 @@ namespace app.Services.ReservationAPI.Service
 
             if (_httpContextAccessor.HttpContext?.Request.Headers.TryGetValue("Authorization", out var authHeader) == true)
             {
-                token = authHeader.ToString().Replace("Bearer ", "");
+                token = authHeader.ToString().Replace("Bearer", "");
             }
 
             return token;

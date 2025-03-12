@@ -12,14 +12,12 @@ namespace app.Services.ReservationAPI.Service
         private readonly IReservationRepository _reservationRepository;
         private readonly IMapper _mapper;
         private readonly ResponseDTO _response;
-        private readonly HttpClient _httpClient;
         private readonly ICarService _carService;
-        public ReservationService(IReservationRepository reservationRepository, IMapper mapper, HttpClient httpClient, ICarService carService)
+        public ReservationService(IReservationRepository reservationRepository, IMapper mapper,ICarService carService)
         {
             _mapper = mapper;
             _reservationRepository = reservationRepository;
             _response = new ResponseDTO();
-            _httpClient = httpClient;
             _carService = carService;
         }
         public async Task<ResponseDTO> GetAllReservations()
@@ -32,7 +30,7 @@ namespace app.Services.ReservationAPI.Service
             }
             catch (Exception ex)
             {
-                _response.Result = false;
+                _response.IsSuccess = false;
 
                 _response.Message = ex.Message;
 
@@ -88,6 +86,15 @@ namespace app.Services.ReservationAPI.Service
                     {
                         var carPrice = Convert.ToDecimal(carPriceResponse.Result);
 
+                        if(reservationDTO.StartDate > reservationDTO.EndDate)
+                        {
+                            _response.IsSuccess = false;
+
+                            _response.Message = "Start Date can't be before End Date";
+
+                            return _response;
+                        }
+
                         var totalDays = (reservationDTO.EndDate - reservationDTO.StartDate).Days;
 
                         var reservation = new Reservation
@@ -117,7 +124,7 @@ namespace app.Services.ReservationAPI.Service
             }
             catch (Exception ex)
             {
-                _response.Result = false;
+                _response.IsSuccess = false;
 
                 _response.Message = ex.Message;
 
