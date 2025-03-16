@@ -99,7 +99,7 @@ namespace app.Services.ReservationAPI.Service
                     {
                         var carPrice = Convert.ToDecimal(carPriceResponse.Result);
 
-                        if(reservationDTO.StartDate > reservationDTO.EndDate)
+                        if(reservationDTO.StartDate >= reservationDTO.EndDate)
                         {
                             _response.IsSuccess = false;
 
@@ -122,6 +122,8 @@ namespace app.Services.ReservationAPI.Service
                         };
 
                         await _reservationRepository.AddReservation(reservation);
+
+                        _response.Result = reservation;
                     }
 
                    

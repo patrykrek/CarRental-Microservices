@@ -30,7 +30,7 @@ namespace app.Web.Controllers
 
             var response = await _mediator.Send(new CreateReservationCommand(viewmodel));
 
-            if(response.Result != null && response.IsSuccess)
+            if(response != null && response.IsSuccess)
             {
                 TempData["success"] = "Reservation created successfully";
 
@@ -39,9 +39,11 @@ namespace app.Web.Controllers
             else
             {
                 TempData["error"] = response.Message;
+
+                return RedirectToAction("Index", "Home");
             }
 
-            return View(viewmodel);
+            
 
         }
 

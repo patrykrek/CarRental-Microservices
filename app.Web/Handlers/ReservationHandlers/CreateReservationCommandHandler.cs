@@ -14,22 +14,15 @@ namespace app.Web.Handlers.ReservationHandlers
             _reservationService = reservationService;
         }
 
-        public async Task<ResponseDTO> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseDTO?> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
         {
-            var response = new ResponseDTO();
-
-            var reservationDTO = new AddReservationDTO
+            return await _reservationService.CreateReservation(new AddReservationDTO
             {
                 StartDate = request.reservation.StartDate,
                 EndDate = request.reservation.EndDate,
                 CarId = request.reservation.carDTO.Id,
                 UserId = request.reservation.UserId
-            };
-
-
-            response.Result = await _reservationService.CreateReservation(reservationDTO);
-
-            return response;
+            });
         }
     }
 }
