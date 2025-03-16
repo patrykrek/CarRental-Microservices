@@ -3,6 +3,7 @@ using app.Services.CarAPI.Models.DTO;
 using app.Services.CarAPI.Repositories.Interfaces;
 using app.Services.CarAPI.Services.Interfaces;
 using AutoMapper;
+using System.Data.Common;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace app.Services.CarAPI.Services
@@ -23,13 +24,20 @@ namespace app.Services.CarAPI.Services
 
             _webHostEnvironment = webHostEnvironment;
         }
-        public async Task<ResponseDTO> DisplayCars()
+        public async Task<ResponseDTO> GetCars()
         {
             try
             {
                 var carsDb = await _carRepository.GetAllCars();
 
                 _response.Result = carsDb.Select(c => _mapper.Map<GetCarDTO>(c)).ToList();
+
+            }
+            catch(DbException dbEx)
+            {
+                _response.IsSuccess = false;
+
+                _response.Message = dbEx.Message;
             }
             catch (Exception ex)
             {
@@ -55,6 +63,12 @@ namespace app.Services.CarAPI.Services
 
                 _response.Result = _mapper.Map<GetCarDTO>(car);
               
+            }
+            catch (DbException dbEx)
+            {
+                _response.IsSuccess = false;
+
+                _response.Message = dbEx.Message;
             }
             catch (Exception ex)
             {
@@ -94,6 +108,12 @@ namespace app.Services.CarAPI.Services
 
                 await _carRepository.AddCar(newCar);
             }
+            catch (DbException dbEx)
+            {
+                _response.IsSuccess = false;
+
+                _response.Message = dbEx.Message;
+            }
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
@@ -111,16 +131,22 @@ namespace app.Services.CarAPI.Services
         {
             try
             {
-                var findCar = await _carRepository.FindCar(id);
+                var car = await _carRepository.FindCar(id);
 
-                if (findCar == null)
+                if (car == null)
                 {
                     _response.IsSuccess = false;
 
                     _response.Message = "Car not found";
                 }
 
-                await _carRepository.DeleteCar(findCar);
+                await _carRepository.DeleteCar(car);
+            }
+            catch (DbException dbEx)
+            {
+                _response.IsSuccess = false;
+
+                _response.Message = dbEx.Message;
             }
             catch (Exception ex)
             {
@@ -133,13 +159,13 @@ namespace app.Services.CarAPI.Services
             return _response;
         }
 
-        public async Task<ResponseDTO> UpdateCar(UpdateCarDTO car)
+        public async Task<ResponseDTO> UpdateCar(UpdateCarDTO carDTO)
         {
             try
             {
-                var getCar = await _carRepository.FindCar(car.Id);
+                var car = await _carRepository.FindCar(carDTO.Id);
                 
-                if(getCar == null)
+                if(car == null)
                 {
                     _response.IsSuccess = false;
 
@@ -147,23 +173,29 @@ namespace app.Services.CarAPI.Services
                 }
                 else
                 {
-                    getCar.Make = car.Make;
+                    car.Make = car.Make;
 
-                    getCar.Model = car.Model;
+                    car.Model = car.Model;
 
-                    getCar.Type = car.Type;
+                    car.Type = car.Type;
 
-                    getCar.Description = car.Description;
+                    car.Description = car.Description;
 
-                    getCar.PricePerDay = car.PricePerDay;
+                    car.PricePerDay = car.PricePerDay;
 
-                    getCar.Year = car.Year;
+                    car.Year = car.Year;
 
-                    getCar.ImageUrl = car.ImageUrl;
+                    car.ImageUrl = car.ImageUrl;
 
-                    await _carRepository.UpdateCar(getCar);
+                    await _carRepository.UpdateCar(car);
                 }               
 
+            }
+            catch (DbException dbEx)
+            {
+                _response.IsSuccess = false;
+
+                _response.Message = dbEx.Message;
             }
             catch (Exception ex)
             {
@@ -181,9 +213,9 @@ namespace app.Services.CarAPI.Services
         {
             try
             {
-                var getCar = await _carRepository.FindCar(id);
+                var car = await _carRepository.FindCar(id);
 
-                if (getCar == null)
+                if (car == null)
                 {
                     _response.IsSuccess = false;
 
@@ -192,10 +224,15 @@ namespace app.Services.CarAPI.Services
                 else
                 {
 
-                    _response.Result = getCar.PricePerDay;
+                    _response.Result = car.PricePerDay;
                 }
             }
+            catch (DbException dbEx)
+            {
+                _response.IsSuccess = false;
 
+                _response.Message = dbEx.Message;
+            }
             catch (Exception ex)
             {
 

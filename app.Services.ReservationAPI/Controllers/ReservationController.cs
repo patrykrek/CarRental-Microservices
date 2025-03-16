@@ -24,14 +24,32 @@ namespace app.Services.ReservationAPI.Controllers
         [HttpGet]
         public async Task<ActionResult> DisplayAllReservations()
         {
-            return Ok(await _reservationService.GetAllReservations());
+            var response = await _reservationService.GetAllReservations();
+
+            if(response.Result == null)
+            {
+                return NotFound($"Reservation list is empty");
+            }
+
+            return Ok(response);
         }
 
         [Authorize(Roles = "User")]
         [HttpGet("{userId}")]
         public async Task<ActionResult> DisplayUserReservations(string userId)
         {
-            return Ok(await _reservationService.GetUserReservations(userId));
+            if (string.IsNullOrEmpty(userId))
+            {
+                return BadRequest($"User ID must be a string");  
+            }
+            var response = await _reservationService.GetUserReservations(userId);
+
+            if(response.Result == null)
+            {
+                return NotFound($"You don't have any reservations");
+            }
+
+            return Ok(response);
         }
 
 
@@ -39,7 +57,19 @@ namespace app.Services.ReservationAPI.Controllers
         [HttpPost("create")]
         public async Task<ActionResult> CreateReservation([FromBody] AddReservationDTO reservationDTO)
         {
-            return Ok(await _reservationService.CreateReservation(reservationDTO));
+            if (string.IsNullOrEmpty(reservationDTO.UserId))
+            {
+                return BadRequest($"User ID must be a string");
+            }
+
+            if(reservationDTO.CarId <= 0)
+            {
+                return BadRequest($"Car ID must be higher than 0");
+            }
+
+            var response = await _reservationService.CreateReservation(reservationDTO);
+
+            return Ok(response);
         }
     }
 }

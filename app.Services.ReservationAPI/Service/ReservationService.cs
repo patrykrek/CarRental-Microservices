@@ -4,6 +4,7 @@ using app.Services.ReservationAPI.Repository.Interface;
 using app.Services.ReservationAPI.Service.Interface;
 using app.Services.ReservationAPI.Utility;
 using AutoMapper;
+using System.Data.Common;
 
 namespace app.Services.ReservationAPI.Service
 {
@@ -27,6 +28,12 @@ namespace app.Services.ReservationAPI.Service
                 var dbReserv = await _reservationRepository.GetAllReservations();
 
                 _response.Result = dbReserv.Select(r => _mapper.Map<GetReservationDTO>(r)).ToList();
+            }
+            catch (DbException dbEx)
+            {
+                _response.IsSuccess = false;
+
+                _response.Message = dbEx.Message;
             }
             catch (Exception ex)
             {
@@ -57,6 +64,12 @@ namespace app.Services.ReservationAPI.Service
                 }
 
                               
+            }
+            catch (DbException dbEx)
+            {
+                _response.IsSuccess = false;
+
+                _response.Message = dbEx.Message;
             }
             catch (Exception ex)
             {
@@ -121,6 +134,12 @@ namespace app.Services.ReservationAPI.Service
 
                     return _response;
                 }
+            }
+            catch (DbException dbEx)
+            {
+                _response.IsSuccess = false;
+
+                _response.Message = dbEx.Message;
             }
             catch (Exception ex)
             {

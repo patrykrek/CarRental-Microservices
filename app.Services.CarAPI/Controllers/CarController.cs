@@ -23,14 +23,35 @@ namespace app.Services.CarAPI.Controllers
         
         public async Task<ActionResult> Get()
         {
-            return Ok(await _carService.DisplayCars());
+            var response = await _carService.GetCars();
+
+            if(response.Result == null)
+            {
+                return NotFound($"Car list is empty");
+            }
+
+            return Ok(response);
+
         }
 
         [Authorize(Roles = "User, Admin")]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(int id)
         {
-            return Ok(await _carService.GetCarById(id));
+            if(id <= 0)
+            {
+                return BadRequest($"ID can't be less than 0");
+            }
+
+            var response = await _carService.GetCarById(id);
+
+            if(response.Result == null)
+            {
+                return NotFound($"Car with ID {id} doesn't exist");
+            }
+
+            return Ok(response);
+
         }
 
         [Authorize(Roles = "Admin")]
@@ -46,9 +67,15 @@ namespace app.Services.CarAPI.Controllers
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
-        {  
-            
-            return Ok(await _carService.DeleteCar(id));
+        {
+            if (id <= 0)
+            {
+                return BadRequest($"ID can't be less than 0");
+            }
+
+            var response = await _carService.DeleteCar(id);
+
+            return Ok(response);
 
         }
 
@@ -56,14 +83,26 @@ namespace app.Services.CarAPI.Controllers
         [HttpPut]
         public async Task<ActionResult> Update([FromBody ]UpdateCarDTO carDTO)
         {
-            return Ok(await _carService.UpdateCar(carDTO));
+            if(carDTO.Id <= 0)
+            {
+                return BadRequest($"ID can't be less than 0");
+            }
+            var response = await _carService.UpdateCar(carDTO);
+
+            return Ok(response);
         }
 
         [Authorize(Roles = "Admin, User")]
         [HttpGet("price/{id}")]
         public async Task<ActionResult> GetPrice(int id)
         {
-            return Ok(await _carService.GetCarPrice(id));
+            if (id <= 0)
+            {
+                return BadRequest($"ID can't be less than 0");
+            }
+            var response = await _carService.GetCarPrice(id);
+
+            return Ok(response);
         }
     }
 }

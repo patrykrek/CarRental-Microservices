@@ -4,11 +4,11 @@ namespace app.Services.CarAPI.Services.Interfaces
 {
     public interface ICarService
     {
-        Task<ResponseDTO> DisplayCars();
+        Task<ResponseDTO> GetCars();
         Task<ResponseDTO> GetCarById(int id);
         Task<ResponseDTO> AddCar(AddCarDTO car);
         Task<ResponseDTO> DeleteCar(int id);
-        Task<ResponseDTO> UpdateCar(UpdateCarDTO car);
+        Task<ResponseDTO> UpdateCar(UpdateCarDTO carDTO);
         Task<ResponseDTO> GetCarPrice(int id);
     }
 }
