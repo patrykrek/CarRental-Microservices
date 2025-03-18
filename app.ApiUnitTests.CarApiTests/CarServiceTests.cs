@@ -49,7 +49,7 @@ namespace app.ApiUnitTests.CarApiTests
 
             //act
 
-            var result = await _carService.DisplayCars();
+            var result = await _carService.GetCars();
 
             //assert
 
@@ -68,7 +68,7 @@ namespace app.ApiUnitTests.CarApiTests
 
             //act
 
-            var response = await _carService.DisplayCars();
+            var response = await _carService.GetCars();
 
             //assert
 
