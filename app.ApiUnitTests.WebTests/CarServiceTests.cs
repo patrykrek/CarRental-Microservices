@@ -37,7 +37,7 @@ namespace app.ApiUnitTests.WebTests
             //assert
             Assert.Equal(expectedResponse, result);
 
-            Assert.True(result.IsSuccess);
+            Assert.True(result?.IsSuccess);
 
         }
 
@@ -61,9 +61,9 @@ namespace app.ApiUnitTests.WebTests
             //assert
             Assert.Equal(expectedResponse, result);
 
-            Assert.False(result.IsSuccess);
+            Assert.False(result?.IsSuccess);
 
-            Assert.Equal("Car list is empty", result.Message);
+            Assert.Equal("Car list is empty", result?.Message);
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace app.ApiUnitTests.WebTests
             var result = await _carService.GetAllCars();
 
             // Assert
-            Assert.True(result.IsSuccess);
+            Assert.True(result?.IsSuccess);
 
             _baseServiceMock.Verify(serv => serv.SendAsync(It.IsAny<RequestDTO>(), It.IsAny<bool>()), Times.Once);
         }
@@ -108,7 +108,7 @@ namespace app.ApiUnitTests.WebTests
 
             Assert.Equal(expectedResponse, result);
 
-            Assert.True(result.IsSuccess);
+            Assert.True(result?.IsSuccess);
         }
 
         [Fact]
@@ -130,9 +130,9 @@ namespace app.ApiUnitTests.WebTests
 
             //assert
 
-            Assert.False(result.IsSuccess);
+            Assert.False(result?.IsSuccess);
 
-            Assert.Equal("Car not found", result.Message);
+            Assert.Equal("Car not found", result?.Message);
 
         }
 
@@ -158,7 +158,7 @@ namespace app.ApiUnitTests.WebTests
             var result = await _carService.GetCarById(carId);
 
             //assert
-            Assert.True(result.IsSuccess);
+            Assert.True(result?.IsSuccess);
 
             _baseServiceMock.Verify(s => s.SendAsync(It.IsAny<RequestDTO>(), It.IsAny<bool>()), Times.Once);
         }
@@ -198,7 +198,7 @@ namespace app.ApiUnitTests.WebTests
             var result = await _carService.AddCar(carDTO);
 
             //assert
-            Assert.True(result.IsSuccess);
+            Assert.True(result?.IsSuccess);
 
             _baseServiceMock.Verify(s => s.SendAsync(It.IsAny<RequestDTO>(), It.IsAny<bool>()), Times.Once);
         }
@@ -238,8 +238,8 @@ namespace app.ApiUnitTests.WebTests
 
 
             //assert
-            Assert.False(result.IsSuccess);
-            Assert.Equal(expectedResponse.Message, result.Message);
+            Assert.False(result?.IsSuccess);
+            Assert.Equal(expectedResponse.Message, result?.Message);
         }
 
         [Fact]
@@ -277,7 +277,7 @@ namespace app.ApiUnitTests.WebTests
             var result = await _carService.AddCar(carDTO);
 
             //assert
-            Assert.True(result.IsSuccess);
+            Assert.True(result?.IsSuccess);
 
             _baseServiceMock.Verify(s => s.SendAsync(It.IsAny<RequestDTO>(), It.IsAny<bool>()), Times.Once);
         }
@@ -302,7 +302,7 @@ namespace app.ApiUnitTests.WebTests
             var result = await _carService.DeleteCar(carId);
 
             //assert
-            Assert.True(result.IsSuccess);
+            Assert.True(result?.IsSuccess);
 
             _baseServiceMock.Verify(s => s.SendAsync(It.IsAny<RequestDTO>(), It.IsAny<bool>()), Times.Once);
         }
@@ -328,9 +328,9 @@ namespace app.ApiUnitTests.WebTests
             var result = await _carService.DeleteCar(carId);
 
             //assert
-            Assert.False(result.IsSuccess);
+            Assert.False(result?.IsSuccess);
 
-            Assert.Equal(expectedResponse.Message, result.Message);
+            Assert.Equal(expectedResponse.Message, result?.Message);
         }
 
         [Fact]
@@ -354,7 +354,7 @@ namespace app.ApiUnitTests.WebTests
 
             //assert
 
-            Assert.True(result.IsSuccess);
+            Assert.True(result?.IsSuccess);
 
             _baseServiceMock.Verify(s => s.SendAsync(It.IsAny<RequestDTO>(), It.IsAny<bool>()), Times.Once);
         }
@@ -396,7 +396,7 @@ namespace app.ApiUnitTests.WebTests
             var result = await _carService.UpdateCar(carDTO);
 
             //assert
-            Assert.True(result.IsSuccess);
+            Assert.True(result?.IsSuccess);
 
             _baseServiceMock.Verify(s => s.SendAsync(It.IsAny<RequestDTO>(), It.IsAny<bool>()), Times.Once);
         }
@@ -439,9 +439,9 @@ namespace app.ApiUnitTests.WebTests
             var result = await _carService.UpdateCar(carDTO);
 
             //assert
-            Assert.False(result.IsSuccess);
+            Assert.False(result?.IsSuccess);
 
-            Assert.Equal(expectedResponse.Message, result.Message);
+            Assert.Equal(expectedResponse.Message, result?.Message);
 
             _baseServiceMock.Verify(s => s.SendAsync(It.IsAny<RequestDTO>(), It.IsAny<bool>()), Times.Once);
         }
@@ -485,7 +485,7 @@ namespace app.ApiUnitTests.WebTests
 
             //assert
 
-            Assert.True(result.IsSuccess);
+            Assert.True(result?.IsSuccess);
 
             _baseServiceMock.Verify(s => s.SendAsync(It.IsAny<RequestDTO>(), It.IsAny<bool>()), Times.Once);
         }

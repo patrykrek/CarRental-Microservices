@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace app.Services.AuthAPI.Controllers
 {
     [ApiController]
-    [Route("auth")]
+    [Route("api/auth")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -56,7 +56,7 @@ namespace app.Services.AuthAPI.Controllers
             return Ok(_response);
         }
 
-        [HttpPost("AssignRole")]
+        [HttpPost("assignrole")]
         public async Task<ActionResult> AssignRole([FromBody] RegistrationRequestDTO requestDTO)
         {
             var AssignRoleSucces = await _authService.AssignRole(requestDTO.Email, requestDTO.Role);
