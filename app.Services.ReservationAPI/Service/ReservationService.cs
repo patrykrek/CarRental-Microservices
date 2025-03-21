@@ -92,6 +92,19 @@ namespace app.Services.ReservationAPI.Service
 
                 if(carExists.IsSuccess && carExists.Result != null)
                 {
+                    var existsingReservations = await _reservationRepository.GetReservationByCarId(reservationDTO.CarId);
+
+                    bool IsCarAlreadyReserved = existsingReservations.Any(r =>
+                    reservationDTO.StartDate < r.EndDate && reservationDTO.EndDate > r.StartDate);
+
+                    if (IsCarAlreadyReserved)
+                    {
+                        _response.IsSuccess = false;
+
+                        _response.Message = "This date is already taken. Choose another date";
+
+                        return _response;
+                    }
 
                     var carPriceResponse = await _carService.GetCarPrice(reservationDTO.CarId);
 

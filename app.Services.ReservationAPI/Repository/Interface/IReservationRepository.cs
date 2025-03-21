@@ -6,6 +6,7 @@ namespace app.Services.ReservationAPI.Repository.Interface
     public interface IReservationRepository
     {
         Task<List<Reservation>> GetAllReservations();
+        Task<List<Reservation>> GetReservationByCarId(int carId);
         Task<List<Reservation>> GetUserReservations(string userId);
         Task AddReservation(Reservation reservation);
         

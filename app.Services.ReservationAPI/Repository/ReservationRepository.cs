@@ -21,11 +21,15 @@ namespace app.Services.ReservationAPI.Repository
         {
             return await _context.Reservations.ToListAsync();
         }
+        public async Task<List<Reservation>> GetReservationByCarId(int carId)
+        {
+            return  await _context.Reservations.Where(r => r.CarId == carId).ToListAsync();
+        }
        
 
         public async Task<List<Reservation>> GetUserReservations(string userId)
         {
-            return  _context.Reservations.Where(r => r.UserId == userId).ToList();
+            return await _context.Reservations.Where(r => r.UserId == userId).ToListAsync();
         }
 
         public async Task AddReservation(Reservation reservation)
