@@ -55,7 +55,9 @@ builder.Services.AddSwaggerGen(options =>
 var settings = builder.Configuration.GetSection("JwtOptions");
 
 var secret = settings.GetValue<string>("Secret");
+
 var issuer = settings.GetValue<string>("Issuer");
+
 var audience = settings.GetValue<string>("Audience");
 
 var key = Encoding.ASCII.GetBytes(secret);

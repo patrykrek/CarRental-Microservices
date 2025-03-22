@@ -7,6 +7,7 @@ namespace app.Services.AuthAPI.Controllers
 {
     [ApiController]
     [Route("api/auth")]
+    
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -17,6 +18,7 @@ namespace app.Services.AuthAPI.Controllers
             _response = new ResponseDTO();
         }
 
+       
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody]RegistrationRequestDTO requestDTO)
         {
@@ -37,6 +39,7 @@ namespace app.Services.AuthAPI.Controllers
 
         }
 
+        
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginRequestDTO requestDTO)
         {
@@ -56,7 +59,8 @@ namespace app.Services.AuthAPI.Controllers
             return Ok(_response);
         }
 
-        [HttpPost("assignrole")]
+        
+        [HttpPost("AssignRole")]
         public async Task<ActionResult> AssignRole([FromBody] RegistrationRequestDTO requestDTO)
         {
             var AssignRoleSucces = await _authService.AssignRole(requestDTO.Email, requestDTO.Role);

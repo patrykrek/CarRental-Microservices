@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.ApiUnitTests.Reservatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.ApiUnitTests.WebTests", "app.ApiUnitTests.WebTests\app.ApiUnitTests.WebTests.csproj", "{894784B3-FFB5-4015-92F0-F202B441C8A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.ApiUnitTests.AuthApiTests", "app.ApiUnitTests.AuthApiTests\app.ApiUnitTests.AuthApiTests.csproj", "{21A0C3C2-1AC7-4400-B075-EC370F0597DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{894784B3-FFB5-4015-92F0-F202B441C8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{894784B3-FFB5-4015-92F0-F202B441C8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{894784B3-FFB5-4015-92F0-F202B441C8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21A0C3C2-1AC7-4400-B075-EC370F0597DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21A0C3C2-1AC7-4400-B075-EC370F0597DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21A0C3C2-1AC7-4400-B075-EC370F0597DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21A0C3C2-1AC7-4400-B075-EC370F0597DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,5 +79,6 @@ Global
 		{7CEC38CC-8DA4-487C-BCBB-B9CBB1C0CFDD} = {1DB21E6B-B722-4741-84FA-30346AE79F2A}
 		{79F1EF2B-1730-48F7-B65B-C978BF9EA9EE} = {1DB21E6B-B722-4741-84FA-30346AE79F2A}
 		{894784B3-FFB5-4015-92F0-F202B441C8A0} = {1DB21E6B-B722-4741-84FA-30346AE79F2A}
+		{21A0C3C2-1AC7-4400-B075-EC370F0597DF} = {1DB21E6B-B722-4741-84FA-30346AE79F2A}
 	EndGlobalSection
 EndGlobal

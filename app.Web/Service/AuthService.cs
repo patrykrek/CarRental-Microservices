@@ -19,7 +19,7 @@ namespace app.Web.Service
             {
                 ApiType = SD.ApiType.POST,
                 Data = registrationRequestDTO,
-                Url = SD.AuthApiBase + "/api/auth/assignrole"
+                Url = SD.AuthApiBase + "/api/auth/AssignRole"
             });
         }
 

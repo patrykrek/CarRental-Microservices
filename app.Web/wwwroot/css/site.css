@@ -20,3 +20,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.car-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.car-image {
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
+    border-radius: 8px;
+}

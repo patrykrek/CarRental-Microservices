@@ -1,0 +1,45 @@
+﻿
+@model List<app.Web.Models.DTO.GetUserDTO>
+
+<div class="text-center">
+    <h1 class="display-4">All Users</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    User Id
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Phone Number
+                </th>              
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @user.Id
+                    </td>
+                    <td>
+                        @user.Email
+                    </td>
+                    <td>
+                        @user.PhoneNumber
+                    </td>                  
+                    <td>
+                        <a class="btn btn-danger btn-sm" asp-controller="User" asp-action="DeleteUser" asp-route-id="@user.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
