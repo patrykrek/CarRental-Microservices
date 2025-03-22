@@ -173,19 +173,19 @@ namespace app.Services.CarAPI.Services
                 }
                 else
                 {
-                    car.Make = car.Make;
+                    car.Make = carDTO.Make;
 
-                    car.Model = car.Model;
+                    car.Model = carDTO.Model;
 
-                    car.Type = car.Type;
+                    car.Type = carDTO.Type;
 
-                    car.Description = car.Description;
+                    car.Description = carDTO.Description;
 
-                    car.PricePerDay = car.PricePerDay;
+                    car.PricePerDay = carDTO.PricePerDay;
 
-                    car.Year = car.Year;
+                    car.Year = carDTO.Year;
 
-                    car.ImageUrl = car.ImageUrl;
+                    car.ImageUrl = carDTO.ImageUrl;
 
                     await _carRepository.UpdateCar(car);
                 }               
