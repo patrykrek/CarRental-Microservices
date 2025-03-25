@@ -111,6 +111,12 @@ namespace app.Services.CarAPI.Services
 
                 await _carRepository.AddCar(newCar);
             }
+            catch (IOException ioEx)
+            {
+                _response.IsSuccess = false;
+
+                _response.Message = ioEx.Message;
+            }
             catch (DbException dbEx)
             {
                 _response.IsSuccess = false;
@@ -184,7 +190,7 @@ namespace app.Services.CarAPI.Services
 
                     var filePath = Path.Combine(uploadsFolder, newFileName);
 
-                    if (File.Exists(filePath)) 
+                    if (!File.Exists(filePath)) 
                     {
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
@@ -213,6 +219,12 @@ namespace app.Services.CarAPI.Services
                     await _carRepository.UpdateCar(car);
                             
 
+            }
+            catch(IOException ioEx)
+            {
+                _response.IsSuccess = false;
+
+                _response.Message = ioEx.Message;
             }
             catch (DbException dbEx)
             {

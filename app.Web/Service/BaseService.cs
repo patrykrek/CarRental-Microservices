@@ -63,7 +63,29 @@ namespace app.Web.Service
 
                         content.Add(new StringContent(carDTO.Year.ToString()), "Year");
 
-                        message.Content = content; // Ustaw zawartość tuta
+                        message.Content = content; 
+                    }
+                    else if (requestDTO.Data is UpdateCarDTO updateCarDTO )
+                    {
+                        var content = new MultipartFormDataContent();
+
+
+                        if (updateCarDTO.Image != null)
+                        {
+                            var imageContent = new StreamContent(updateCarDTO.Image.OpenReadStream());
+                            imageContent.Headers.ContentType = new MediaTypeHeaderValue(updateCarDTO.Image.ContentType);
+                            content.Add(imageContent, "ImageFile", updateCarDTO.Image.FileName);
+                        }
+
+                        content.Add(new StringContent(updateCarDTO.Id.ToString()), "Id");
+                        content.Add(new StringContent(updateCarDTO.Make), "Make");
+                        content.Add(new StringContent(updateCarDTO.Model), "Model");
+                        content.Add(new StringContent(updateCarDTO.PricePerDay.ToString()), "PricePerDay");
+                        content.Add(new StringContent(updateCarDTO.Type), "Type");
+                        content.Add(new StringContent(updateCarDTO.Description), "Description");
+                        content.Add(new StringContent(updateCarDTO.Year.ToString()), "Year");                      
+
+                        message.Content = content; 
                     }
                     else
                     {
@@ -100,7 +122,7 @@ namespace app.Web.Service
                         break;
 
                 }
-
+                
                 apiResponse = await client.SendAsync(message);
 
                 switch (apiResponse.StatusCode)
@@ -119,6 +141,8 @@ namespace app.Web.Service
 
                     default:
                         var apiContent = await apiResponse.Content.ReadAsStringAsync();
+
+                        Console.WriteLine($"API Response: {apiContent}");
 
                         var apiResponseDto = JsonConvert.DeserializeObject<ResponseDTO>(apiContent);
 

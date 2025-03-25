@@ -8,7 +8,7 @@
         public string Type { get; set; }
         public string Description { get; set; }
         public decimal PricePerDay { get; set; }
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
         public int Year { get; set; }
     }
 }

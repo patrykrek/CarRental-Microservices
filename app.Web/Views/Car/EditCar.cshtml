@@ -11,8 +11,10 @@
 </div>
 
 <form asp-controller="Car" asp-action="EditCar" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id"></input>
+    
     <div class="form-group">
-
+       
         <label class="mt-4">Make</label>
 
         <input class="form-control" type="text" placeholder="Make" asp-for="Make"></input>
@@ -34,7 +36,7 @@
 
         <label class="mt-4">Type</label>
 
-        <input class="form-control" type="text" placeholder="Type" asp-for="Type"></input>
+        <input class="form-control" type="text" placeholder="Type" asp-for="Type"></input>      
 
         <span class="text-danger" asp-validation-for="Type"></span>
 

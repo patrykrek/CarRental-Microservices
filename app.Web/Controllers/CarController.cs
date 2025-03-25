@@ -102,10 +102,12 @@ namespace app.Web.Controllers
 
             ResponseDTO? response = await _mediator.Send(new GetCarByIdQuery(id));
 
-            if(response != null || response.IsSuccess)
+            if(response != null && response.IsSuccess)
             {
                 carForUpdate = JsonConvert.DeserializeObject<UpdateCarDTO>(Convert.ToString(response.Result));
             }
+
+            
 
             return View(carForUpdate);
         }
@@ -114,9 +116,10 @@ namespace app.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> EditCar(UpdateCarDTO carDTO)
         {
+            
             ResponseDTO? response = await _mediator.Send(new UpdateCarCommand(carDTO));
 
-            if (response != null || response.IsSuccess)
+            if (response != null && response.IsSuccess)
             {
                 TempData["success"] = "Car updated successfully";
 
