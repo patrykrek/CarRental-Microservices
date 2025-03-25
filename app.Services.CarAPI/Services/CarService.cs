@@ -85,14 +85,17 @@ namespace app.Services.CarAPI.Services
         public async Task<ResponseDTO> AddCar(AddCarDTO car)
         {
             try
-            {           
-                var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(car.ImageFile.FileName)}";
+            {
+                var fileName = Path.GetFileName(car.ImageFile.FileName);
 
                 var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", fileName);
 
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                if (!File.Exists(filePath))
                 {
-                    await car.ImageFile.CopyToAsync(stream);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await car.ImageFile.CopyToAsync(stream);
+                    }
                 }
 
                 var newCar = new Car
@@ -164,15 +167,35 @@ namespace app.Services.CarAPI.Services
             try
             {
                 var car = await _carRepository.FindCar(carDTO.Id);
-                
-                if(car == null)
+
+                if (car == null)
                 {
                     _response.IsSuccess = false;
 
                     _response.Message = "Car not found";
                 }
-                else
+                string fileName = car.ImageUrl;
+
+                if(carDTO.ImageFile != null)
                 {
+                    var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+
+                    var newFileName = Path.GetFileName(carDTO.ImageFile.FileName);
+
+                    var filePath = Path.Combine(uploadsFolder, newFileName);
+
+                    if (File.Exists(filePath)) 
+                    {
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await carDTO.ImageFile.CopyToAsync(stream);
+                        }
+                    }
+
+                    fileName = $"https://localhost:7001/uploads/{newFileName}";
+                }              
+              
+                
                     car.Make = carDTO.Make;
 
                     car.Model = carDTO.Model;
@@ -185,10 +208,10 @@ namespace app.Services.CarAPI.Services
 
                     car.Year = carDTO.Year;
 
-                    car.ImageUrl = carDTO.ImageUrl;
+                    car.ImageUrl = fileName;
 
                     await _carRepository.UpdateCar(car);
-                }               
+                            
 
             }
             catch (DbException dbEx)

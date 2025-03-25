@@ -67,7 +67,7 @@ namespace app.Services.CarAPI.Controllers
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
-        {
+        {          
             if (id <= 0)
             {
                 return BadRequest($"ID can't be less than 0");
@@ -81,12 +81,13 @@ namespace app.Services.CarAPI.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut]
-        public async Task<ActionResult> Update([FromBody ]UpdateCarDTO carDTO)
-        {
-            if(carDTO.Id <= 0)
+        public async Task<ActionResult> Update([FromForm]UpdateCarDTO carDTO)
+        {         
+            if (carDTO.Id <= 0)
             {
                 return BadRequest($"ID can't be less than 0");
             }
+
             var response = await _carService.UpdateCar(carDTO);
 
             return Ok(response);
