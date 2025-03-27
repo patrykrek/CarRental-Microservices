@@ -179,6 +179,8 @@ namespace app.Services.CarAPI.Services
                     _response.IsSuccess = false;
 
                     _response.Message = "Car not found";
+
+                    return _response;
                 }
                 string fileName = car.ImageUrl;
 
