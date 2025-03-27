@@ -281,62 +281,85 @@ namespace app.ApiUnitTests.CarApiTests.ServiceTests
         [Fact]
         public async Task UpdateCar_ShouldUpdateCar_WhenEverythingIsCorrect()
         {
-            //arrange
+            // Arrange
             var carDTO = new UpdateCarDTO
             {
                 Id = 1,
-
-                Make = "test2",
-
-                Model = "test2",
-
-                Type = "test2",
-
-                Year = 2000,
-
-                PricePerDay = 200,
-
-                Description = "test",
-
-                ImageFile = new FormFile(new MemoryStream(), 0, 0, "uploads", "image.png")
+                Make = "Ford",
+                Model = "Mustang",
+                Type = "Coupe",
+                Description = "A fast car",
+                PricePerDay = 100,
+                Year = 2020,
+                ImageFile = new FormFile(new MemoryStream(), 0, 0, "ImageFile", "test.png")
             };
 
             var car = new Car
             {
-                Id = carDTO.Id,
-
-                Make = carDTO.Make,
-
-                Model = carDTO.Model,
-
-                Type = carDTO.Type,
-
-                Year = carDTO.Year,
-
-                PricePerDay = carDTO.PricePerDay,
-
-                Description = carDTO.Description,
-
-                ImageUrl = "https://localhost:7001/uploads/image.png"
+                Id = 1,
+                Make = "BMW",
+                Model = "M3",
+                Type = "Sedan",
+                Description = "A luxury car",
+                PricePerDay = 150,
+                Year = 2019,
+                ImageUrl = "https://localhost:7001/uploads/old.png"
             };
-
-
 
             _carRepositoryMock.Setup(repo => repo.FindCar(carDTO.Id)).ReturnsAsync(car);
 
-            _carRepositoryMock.Setup(repo => repo.UpdateCar(car)).Returns(Task.CompletedTask);
+            string fakePath = Path.Combine(Path.GetTempPath(), "wwwroot");
 
-            //act
+            string uploadsPath = Path.Combine(fakePath, "uploads");
 
-            var result = await _carService.UpdateCar(carDTO);
+            Directory.CreateDirectory(uploadsPath);
 
-            //assert
-            Assert.NotNull(result);
+            _webHostEnvironmentMock.Setup(env => env.WebRootPath).Returns(fakePath);
 
-            Assert.True(result.IsSuccess);
+            // Act
+            var response = await _carService.UpdateCar(carDTO);
 
-            _carRepositoryMock.Verify(repo => repo.UpdateCar(car), Times.Once);
+            // Assert
+            Assert.True(response.IsSuccess);
+            _carRepositoryMock.Verify(repo => repo.UpdateCar(It.IsAny<Car>()), Times.Once);
 
+        }
+
+        [Fact]
+        public async Task UpdateCar_ShouldUpdateCarWithoutNewImage()
+        {
+            // Arrange
+            var carDTO = new UpdateCarDTO
+            {
+                Id = 1,
+                Make = "Ford",
+                Model = "Mustang",
+                Type = "Coupe",
+                Description = "A fast car",
+                PricePerDay = 100,
+                Year = 2020
+            };
+
+            var car = new Car
+            {
+                Id = 1,
+                Make = "BMW",
+                Model = "M3",
+                Type = "Sedan",
+                Description = "A luxury car",
+                PricePerDay = 150,
+                Year = 2019,
+                ImageUrl = "https://localhost:7001/uploads/old.png"
+            };
+
+            _carRepositoryMock.Setup(repo => repo.FindCar(carDTO.Id)).ReturnsAsync(car);
+
+            // Act
+            var response = await _carService.UpdateCar(carDTO);
+
+            // Assert
+            Assert.True(response.IsSuccess);
+            _carRepositoryMock.Verify(repo => repo.UpdateCar(It.IsAny<Car>()), Times.Once);
         }
 
         [Fact]
@@ -346,99 +369,83 @@ namespace app.ApiUnitTests.CarApiTests.ServiceTests
             var carDTO = new UpdateCarDTO
             {
                 Id = 1,
-
                 Make = "test2",
-
                 Model = "test2",
-
                 Type = "test2",
-
                 Year = 2000,
-
                 PricePerDay = 200,
-
                 Description = "test",
-
                 ImageFile = new FormFile(new MemoryStream(), 0, 0, "uploads", "image.png")
             };
+           
 
             _carRepositoryMock.Setup(repo => repo.FindCar(carDTO.Id)).ReturnsAsync((Car)null);
 
+            
+
             //act
 
-            var result = await _carService.UpdateCar(carDTO);
-
+            var response = await _carService.UpdateCar(carDTO);
 
             //assert
 
-            Assert.NotNull(result);
+            Assert.False(response.IsSuccess);
 
-            Assert.False(result.IsSuccess);
-
-            Assert.Equal("Car not found", result.Message);
+            Assert.Equal("Car not found", response.Message);
 
             _carRepositoryMock.Verify(repo => repo.UpdateCar(It.IsAny<Car>()), Times.Never);
+
+
         }
 
         [Fact]
-        public async Task UpdateCar_ShouldReturnFalseSuccessAndMessage_WhenExceptionIsThrown()
+        public async Task UpdateCar_ShouldHandleIOException_WhenExceptionIsThrown()
         {
             //arrange
             var carDTO = new UpdateCarDTO
             {
                 Id = 1,
-
                 Make = "test2",
-
                 Model = "test2",
-
                 Type = "test2",
-
                 Year = 2000,
-
                 PricePerDay = 200,
-
                 Description = "test",
-
                 ImageFile = new FormFile(new MemoryStream(), 0, 0, "uploads", "image.png")
             };
 
             var car = new Car
             {
-                Id = carDTO.Id,
-
-                Make = carDTO.Make,
-
-                Model = carDTO.Model,
-
-                Type = carDTO.Type,
-
-                Year = carDTO.Year,
-
-                PricePerDay = carDTO.PricePerDay,
-
-                Description = carDTO.Description,
-
-                ImageUrl = "https://localhost:7001/uploads/image.png"
+                Id = 1,
+                Make = "BMW",
+                Model = "M3",
+                Type = "Sedan",
+                Description = "A luxury car",
+                PricePerDay = 150,
+                Year = 2019,
+                ImageUrl = "https://localhost:7001/uploads/old.png"
             };
 
             _carRepositoryMock.Setup(repo => repo.FindCar(carDTO.Id)).ReturnsAsync(car);
 
-            _carRepositoryMock.Setup(repo => repo.UpdateCar(car)).ThrowsAsync(new SystemException("Database problem"));
+            string fakePath = Path.Combine(Path.GetTempPath(), "wwwroot");
+
+            string uploadsPath = Path.Combine(fakePath, "uploads");
+
+            Directory.CreateDirectory(uploadsPath);
+
+            _webHostEnvironmentMock.Setup(w => w.WebRootPath).Returns(fakePath);
+
+            _carRepositoryMock.Setup(repo => repo.UpdateCar(It.IsAny<Car>())).ThrowsAsync(new IOException("File error"));
 
             //act
 
-            var result = await _carService.UpdateCar(carDTO);
+            var response = await _carService.UpdateCar(carDTO);
 
             //assert
+            Assert.False(response.IsSuccess);
 
-            Assert.NotNull(result);
-
-            Assert.False(result.IsSuccess);
-
-            Assert.Equal("Database problem", result.Message);
-
-
+            Assert.Equal("File error", response.Message);
         }
 
         [Fact]
@@ -479,7 +486,13 @@ namespace app.ApiUnitTests.CarApiTests.ServiceTests
                 ImageUrl = "https://localhost:7001/uploads/image.png"
             };
 
-            _webHostEnvironmentMock.Setup(webhost => webhost.WebRootPath).Returns("wwwroot");
+            string fakePath = Path.Combine(Path.GetTempPath(), "wwwroot");
+
+            string uploadsPath = Path.Combine(fakePath, "uploads");
+
+            Directory.CreateDirectory(uploadsPath);
+
+            _webHostEnvironmentMock.Setup(webhost => webhost.WebRootPath).Returns(fakePath);
 
             _carRepositoryMock.Setup(repo => repo.AddCar(It.IsAny<Car>())).Returns(Task.CompletedTask);
 
@@ -496,7 +509,50 @@ namespace app.ApiUnitTests.CarApiTests.ServiceTests
             _carRepositoryMock.Verify(repo => repo.AddCar(It.IsAny<Car>()), Times.Once);
         }
 
+        [Fact]
+        public async Task AddCar_ShouldHandleIOException_WhenExceptionIsThrown()
+        {
+            //arrange
+            var carDTO = new AddCarDTO
+            {
+                Make = "test2",
 
+                Model = "test2",
+
+                Type = "test2",
+
+                Year = 2000,
+
+                PricePerDay = 200,
+
+                Description = "test",
+
+                ImageFile = new FormFile(new MemoryStream(), 0, 0, "uploads", "image.png")
+            };
+
+            string fakePath = Path.Combine(Path.GetTempPath(), "wwwroot");
+
+            string uploadsPath = Path.Combine(fakePath, "uploads");
+
+            Directory.CreateDirectory(uploadsPath);
+
+            _webHostEnvironmentMock.Setup(w => w.WebRootPath).Returns(fakePath);
+
+            _carRepositoryMock.Setup(repo => repo.AddCar(It.IsAny<Car>())).ThrowsAsync(new IOException("File error"));
+
+
+            //act
+
+            var response = await _carService.AddCar(carDTO);
+
+            //assert
+            Assert.False(response.IsSuccess);
+
+            Assert.Equal("File error", response.Message);
+
+        }
 
     }
+
+    
 }
