@@ -108,7 +108,7 @@ namespace app.ApiUnitTests.WebTests
             };
 
             _baseServiceMock.Setup(s => s.SendAsync(It.Is<RequestDTO>(req =>
-            req.ApiType == SD.ApiType.POST && req.Url == SD.AuthApiBase + "/api/auth/assignrole" && req.Data == registrationDTO), It.IsAny<bool>()))
+            req.ApiType == SD.ApiType.POST && req.Url == SD.AuthApiBase + "/api/auth/AssignRole" && req.Data == registrationDTO), It.IsAny<bool>()))
                 .ReturnsAsync(expectedResponse);
 
 

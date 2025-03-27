@@ -232,6 +232,9 @@ namespace app.ApiUnitTests.ReservationApiTests.ServiceTests
             _carServiceMock.Setup(serv => serv.GetCarPrice(It.IsAny<int>()))
                 .ReturnsAsync(new ResponseDTO { IsSuccess = true, Result = 100 });
 
+            _reservationRepositoryMock.Setup(repo => repo.GetReservationByCarId(It.IsAny<int>()))
+                .ReturnsAsync(new List<Reservation>());
+
             _reservationRepositoryMock.Setup(repo => repo.AddReservation(It.IsAny<Reservation>()))
                 .Returns(Task.CompletedTask);
 
@@ -284,11 +287,15 @@ namespace app.ApiUnitTests.ReservationApiTests.ServiceTests
                 UserId = "userId"
             };
 
+
             _carServiceMock.Setup(serv => serv.GetCarById(It.IsAny<int>()))
                 .ReturnsAsync(new ResponseDTO { IsSuccess = true, Result = new object() });
 
             _carServiceMock.Setup(serv => serv.GetCarPrice(It.IsAny<int>()))
                 .ReturnsAsync(new ResponseDTO { IsSuccess = true, Result = 100 });
+
+            _reservationRepositoryMock.Setup(repo => repo.GetReservationByCarId(reservationDTO.CarId))
+                .ReturnsAsync(new List<Reservation>());
 
             //act
 

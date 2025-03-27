@@ -24,6 +24,9 @@ namespace app.ApiUnitTests.CarApiTests.RepositoryTests
 
             _context = new DataContext(options);
 
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
+
             _context.Cars.AddRange(new List<Car>
             {
                 new Car 

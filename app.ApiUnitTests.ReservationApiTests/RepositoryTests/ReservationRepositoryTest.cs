@@ -22,6 +22,10 @@ namespace app.ApiUnitTests.ReservationApiTests.RepositoryTests
 
             _context = new DataContext(options);
 
+            _context.Database.EnsureDeleted();
+
+            _context.Database.EnsureCreated();
+
             _reservationRepository = new ReservationRepository(_context);
 
             _context.AddRange(new List<Reservation>
