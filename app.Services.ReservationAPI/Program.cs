@@ -20,9 +20,19 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddHttpClient<ICarService, CarService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 SD.CarApiBase = builder.Configuration["ServiceUrls:CarAPI"];
 SD.AuthApiBase = builder.Configuration["ServiceUrls:AuthAPI"];
+SD.ApiGatewayBase = builder.Configuration["ServiceUrls:ApiGateway"];
 
 builder.Services.AddHttpClient<ICarService, CarService>();
 builder.Services.AddHttpClient<IReservationService, ReservationService>();
@@ -104,6 +114,8 @@ builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.AddScoped<IBaseService, BaseService>();
 
 var app = builder.Build();
+
+app.UseCors("CorsPolicy");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

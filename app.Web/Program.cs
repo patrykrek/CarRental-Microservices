@@ -11,6 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddHttpClient();
@@ -41,6 +51,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 SD.CarApiBase = builder.Configuration["ServiceUrls:CarAPI"];
 SD.AuthApiBase = builder.Configuration["ServiceUrls:AuthAPI"];
 SD.ReservationApiBase = builder.Configuration["ServiceUrls:ReservationAPI"];
+SD.ApiGatewayBase = builder.Configuration["ServiceUrls:ApiGateway"];
 
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.AddScoped<IBaseService, BaseService>();
@@ -51,6 +62,8 @@ builder.Services.AddScoped<IReservationService, ReservationService>();
 
 
 var app = builder.Build();
+
+app.UseCors("CorsPolicy");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
