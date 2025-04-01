@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.ApiUnitTests.WebTests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.ApiUnitTests.AuthApiTests", "app.ApiUnitTests.AuthApiTests\app.ApiUnitTests.AuthApiTests.csproj", "{21A0C3C2-1AC7-4400-B075-EC370F0597DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app.ApiGateway", "app.ApiGateway\app.ApiGateway.csproj", "{12886430-E3D7-4591-814A-DEBA8E58CAC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{21A0C3C2-1AC7-4400-B075-EC370F0597DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21A0C3C2-1AC7-4400-B075-EC370F0597DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21A0C3C2-1AC7-4400-B075-EC370F0597DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12886430-E3D7-4591-814A-DEBA8E58CAC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12886430-E3D7-4591-814A-DEBA8E58CAC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12886430-E3D7-4591-814A-DEBA8E58CAC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12886430-E3D7-4591-814A-DEBA8E58CAC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +86,6 @@ Global
 		{79F1EF2B-1730-48F7-B65B-C978BF9EA9EE} = {1DB21E6B-B722-4741-84FA-30346AE79F2A}
 		{894784B3-FFB5-4015-92F0-F202B441C8A0} = {1DB21E6B-B722-4741-84FA-30346AE79F2A}
 		{21A0C3C2-1AC7-4400-B075-EC370F0597DF} = {1DB21E6B-B722-4741-84FA-30346AE79F2A}
+		{12886430-E3D7-4591-814A-DEBA8E58CAC6} = {A24FC6E1-BAF3-4E3C-AB62-8A7CB6C54EE3}
 	EndGlobalSection
 EndGlobal
