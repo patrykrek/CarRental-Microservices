@@ -18,7 +18,7 @@ namespace app.Web.Service
             return await _baseService.SendAsync(new RequestDTO()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = SD.AuthApiBase + "/api/users/" + userId
+                Url = SD.ApiGatewayBase + "/api/users/" + userId
             });
         }
 
@@ -27,7 +27,7 @@ namespace app.Web.Service
             return await _baseService.SendAsync(new RequestDTO()
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.AuthApiBase + "/api/users"
+                Url = SD.ApiGatewayBase + "/api/users"
             });
         }
     }

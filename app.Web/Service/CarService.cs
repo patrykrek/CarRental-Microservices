@@ -21,7 +21,7 @@ namespace app.Web.Service
             {
                 ApiType = SD.ApiType.GET,
 
-                Url = SD.CarApiBase + "/api/cars"
+                Url = SD.ApiGatewayBase + "/api/cars"
 
             });
                 
@@ -33,7 +33,7 @@ namespace app.Web.Service
             {
                 ApiType = SD.ApiType.GET,
 
-                Url = SD.CarApiBase + "/api/cars/" + id
+                Url = SD.ApiGatewayBase + "/api/cars/" + id
 
             });
         }
@@ -45,7 +45,7 @@ namespace app.Web.Service
 
                 Data = carDTO,
 
-                Url = SD.CarApiBase + "/api/cars/add"
+                Url = SD.ApiGatewayBase + "/api/cars/add"
                                 
             });
         }
@@ -56,7 +56,7 @@ namespace app.Web.Service
             {
                 ApiType = SD.ApiType.DELETE,
 
-                Url = SD.CarApiBase + "/api/cars/" + id
+                Url = SD.ApiGatewayBase + "/api/cars/" + id
 
             });
         }       
@@ -68,7 +68,7 @@ namespace app.Web.Service
 
                 Data = carDTO,
 
-                Url = SD.CarApiBase + "/api/cars"
+                Url = SD.ApiGatewayBase + "/api/cars"
             });
         }
     }

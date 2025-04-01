@@ -25,7 +25,7 @@ namespace app.Services.ReservationAPI.Service
             return await _baseService.SendAsync(new RequestDTO()
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.CarApiBase + "/api/cars/" + carId
+                Url = SD.ApiGatewayBase + "/api/cars/" + carId
             });
 
         }
@@ -35,7 +35,7 @@ namespace app.Services.ReservationAPI.Service
             return await _baseService.SendAsync(new RequestDTO()
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.CarApiBase + "/api/cars/price/" + carId
+                Url = SD.ApiGatewayBase + "/api/cars/price/" + carId
             });
         }
     }

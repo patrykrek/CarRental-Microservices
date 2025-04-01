@@ -19,7 +19,7 @@ namespace app.Web.Service
             {
                 ApiType = SD.ApiType.POST,
                 Data = registrationRequestDTO,
-                Url = SD.AuthApiBase + "/api/auth/AssignRole"
+                Url = SD.ApiGatewayBase + "/api/auth/AssignRole"
             });
         }
 
@@ -29,7 +29,7 @@ namespace app.Web.Service
             {
                 ApiType = SD.ApiType.POST,
                 Data = loginRequestDTO,               
-                Url = SD.AuthApiBase + "/api/auth/login"
+                Url = SD.ApiGatewayBase + "/api/auth/login"
             }, withBearer: false);
         }
 
@@ -39,7 +39,7 @@ namespace app.Web.Service
             {
                 ApiType = SD.ApiType.POST,
                 Data = registrationRequestDTO,
-                Url = SD.AuthApiBase + "/api/auth/register"
+                Url = SD.ApiGatewayBase + "/api/auth/register"
             }, withBearer: false);
         }
     }

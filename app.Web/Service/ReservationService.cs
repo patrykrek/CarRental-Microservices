@@ -18,7 +18,7 @@ namespace app.Web.Service
              {
                  ApiType = SD.ApiType.POST,
                  Data = reservation,
-                 Url = SD.ReservationApiBase + "/api/reservation/create"
+                 Url = SD.ApiGatewayBase + "/api/reservation/create"
              });
         }
 
@@ -27,7 +27,7 @@ namespace app.Web.Service
             return await _baseService.SendAsync(new RequestDTO()
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.ReservationApiBase + "/api/reservation"
+                Url = SD.ApiGatewayBase + "/api/reservation"
             });
         }
 
@@ -36,7 +36,7 @@ namespace app.Web.Service
             return await _baseService.SendAsync(new RequestDTO()
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.ReservationApiBase + "/api/reservation/" + userId
+                Url = SD.ApiGatewayBase + "/api/reservation/" + userId
             });
         }
     }
