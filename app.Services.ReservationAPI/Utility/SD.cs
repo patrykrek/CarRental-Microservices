@@ -2,8 +2,10 @@
 {
     public class SD
     {
+        public static string ApiGatewayBase { get; set; }
         public static string CarApiBase { get; set; }
         public static string AuthApiBase { get; set; }
+
         public static string TokenCookie = "JwtToken";
 
         public enum ApiType
